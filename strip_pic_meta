@@ -3,7 +3,7 @@
 """
 A CLI to strip exif data from images. Should take:
 - a file name, to strip data in the file
-- tested with .png, .jpg, .gif file_formats.
+- tested with .png, .jpg, file_formats. Doesn't work with gif animations
 Add this to /usr/local/bin for ease of use.
 """
 

@@ -1,11 +1,11 @@
 ### CLI to strip data from images.
 
-I made this one page CLI as an easy way to strip exif (and other) metadata from pics, because I'm sceptical of what
-companies like Facebook and others are likely to do with it.
+I made this one page CLI as an easy way to strip exif (and other) metadata from pics, because I'm 
+sceptical of what companies like Facebook and others are likely to do with that data.
 
 Most phone cameras will save metadata in pics when the pics are taken. Most JPG-PNG converters will
 drop the metadata, and yet you can still add metadata to pics manually. I want an easy way to strip
-metadata from pics.
+all metadata from all pics.
 
 Some cameras will save the GPS coords, the time taken, details about the phone, etc. If you've taken
 a photo of your children with these details, then obviously that's scary right?
