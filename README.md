@@ -21,3 +21,5 @@ To make this easy to use, I saved my program in /usr/local/bin/
 TO DO
 - Make the program accept an -r arg, to process the entire folder.
 - Make the program accept target output destination.
+- Create a backend for this, to be available online for people to use. Would need a Docker env to
+  deal with potentially malicious files.
