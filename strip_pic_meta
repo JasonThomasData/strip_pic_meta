@@ -1,0 +1,69 @@
+#!/usr/bin/env python3.5
+
+"""
+A CLI to strip exif data from images. Should take:
+- a file name, to strip data in the file
+- tested with .png, .jpg, .gif file_formats.
+Add this to /usr/local/bin for ease of use.
+"""
+
+import sys
+import PIL.Image
+
+def get_file_name_arg():
+    try:
+        file_name_arg = sys.argv[1]
+        return file_name_arg
+    except IndexError:
+        err_message = "Please specify a file you wish to strip exif data from."
+        print(err_message)
+        sys.exit()
+
+def get_save_file_name(file_name):
+    ext = "strp_"
+    save_file_name = "{}{}".format(ext, file_name)
+    return save_file_name
+
+def get_img(file_name):
+    """
+    Can raise FileNotFoundError, OSError(cannot identify image file)
+    """
+    img = PIL.Image.open(file_name)
+    return img
+
+def get_img_data(img):
+    img_data = img.getdata()
+    return img_data
+
+def get_img_dimensions(img):
+    _, _, width_px, height_px = img.getbbox()
+    img_px = (width_px, height_px)
+    return img_px
+
+def create_new_img(img_data, img_px):
+    img = PIL.Image.new("RGB", img_px)
+    try:
+        img.putdata(img_data)
+        return img
+    except TypeError:
+        err_message = "Mismatch between img size and data range, does not match"
+        print(err_message)
+        sys.exit()
+
+def report_results(file_name, save_file_name, img_px):
+    result_message = "Saving {} as {}, size: {}".format(file_name, save_file_name, img_px)
+    print(result_message)
+
+def save_stripped_img(new_img, save_file_name):
+    new_img.save(save_file_name)
+
+if __name__ == "__main__":
+    FILE_NAME = get_file_name_arg()
+    #SAVE_FILE_NAME = get_save_file_name(FILE_NAME)
+    IMG = get_img(FILE_NAME)
+    IMG_DATA = get_img_data(IMG)
+    IMG_PX = get_img_dimensions(IMG)
+    NEW_IMG = create_new_img(IMG_DATA, IMG_PX)
+
+    report_results(FILE_NAME, FILE_NAME, IMG_PX)
+    save_stripped_img(NEW_IMG, FILE_NAME)
